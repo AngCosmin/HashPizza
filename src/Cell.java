@@ -1,10 +1,13 @@
 import java.awt.*;
 
 public abstract class Cell {
-    public Point position;
+    public int x;
+    public int y;
     public boolean isTaken;
 
     public Cell (int x, int y) {
-        position = new Point(x, y);
+        this.x = x;
+        this.y = y;
+        this.isTaken = false;
     }
 }

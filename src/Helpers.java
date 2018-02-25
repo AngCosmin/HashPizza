@@ -6,15 +6,15 @@ public class Helpers {
         int numberOfTomatos = 0;
         int numberOfMushrooms = 0;
 
-        int x = bottomRight.position.x - topLeft.position.x + 1;
-        int y = bottomRight.position.y - topLeft.position.y + 1;
+        int x = bottomRight.x - topLeft.x + 1;
+        int y = bottomRight.y - topLeft.y + 1;
 
         if (x * y > data.maxNumberOfCells) {
             return false;
         }
 
-        for (int i = topLeft.position.x; i < bottomRight.position.x; i++) {
-            for (int j = topLeft.position.y; j < bottomRight.position.y; j++) {
+        for (int i = topLeft.x; i < bottomRight.x; i++) {
+            for (int j = topLeft.y; j < bottomRight.y; j++) {
                 if (data.matrix[i][j].isTaken) {
                     return false;
                 }
@@ -38,8 +38,8 @@ public class Helpers {
     public static int getNumberOfMushrooms (InputData data, Cell topLeft, Cell bottomRight) {
         int number = 0;
 
-        for (int i = topLeft.position.x; i < bottomRight.position.x; i++) {
-            for (int j = topLeft.position.y; j < bottomRight.position.y; j++) {
+        for (int i = topLeft.x; i < bottomRight.x; i++) {
+            for (int j = topLeft.y; j < bottomRight.y; j++) {
                 if (data.matrix[i][j] instanceof Mushroom) {
                      number++;
                 }
@@ -52,8 +52,8 @@ public class Helpers {
     public static int getNumberOfTomatoes (InputData data, Cell topLeft, Cell bottomRight) {
         int number = 0;
 
-        for (int i = topLeft.position.x; i < bottomRight.position.x; i++) {
-            for (int j = topLeft.position.y; j < bottomRight.position.y; j++) {
+        for (int i = topLeft.x; i < bottomRight.x; i++) {
+            for (int j = topLeft.y; j < bottomRight.y; j++) {
                 if (data.matrix[i][j] instanceof Tomato) {
                     number++;
                 }
@@ -79,8 +79,8 @@ public class Helpers {
     }
 
     public static void markSlice(InputData data, Cell topLeft, Cell bottomRight) {
-        for (int i = topLeft.position.x; i < bottomRight.position.x; i++) {
-            for (int j = topLeft.position.y; j < bottomRight.position.y; j++) {
+        for (int i = topLeft.x; i < bottomRight.x; i++) {
+            for (int j = topLeft.y; j < bottomRight.y; j++) {
                 data.matrix[i][j].isTaken = true;
             }
         }

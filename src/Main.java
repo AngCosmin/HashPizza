@@ -3,7 +3,8 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        InputData in = HashIO.read("small.in");
+        InputData in = new InputData();
+        in.read("small.in");
         ArrayList<OutputData> out = new ArrayList<>();
 
         Queue<Cell> neighbors = new LinkedList<>();
@@ -27,10 +28,10 @@ public class Main {
                 }
 
                 for (short i = 0; i < 5; i++) {
-                    int x = bottomRight.position.x + directions.elementAt(i).x;
-                    int y = bottomRight.position.y + directions.elementAt(i).y;
+                    int x = bottomRight.x + directions.elementAt(i).x;
+                    int y = bottomRight.y + directions.elementAt(i).y;
 
-                    if (x < 0 || y < 0) {
+                    if (x < 0 || y < 0 || x > in.rows - 1 || y > in.columns - 1) {
                         continue;
                     }
 
@@ -50,8 +51,8 @@ public class Main {
                     int numberOfMushrooms = Helpers.getNumberOfMushrooms(in, topLeft, bottomRight);
 
                     for (short i = 0; i < 5; i++) {
-                        int x = bottomRight.position.x + directions.elementAt(i).x;
-                        int y = bottomRight.position.y + directions.elementAt(i).y;
+                        int x = bottomRight.x + directions.elementAt(i).x;
+                        int y = bottomRight.y + directions.elementAt(i).y;
 
                         if (x < 0 || y < 0) {
                             continue;
