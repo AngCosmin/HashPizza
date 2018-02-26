@@ -98,7 +98,7 @@ public class Helpers {
                         }
 
                         if (!data.matrix[x][y].isTaken) {
-                            return data.matrix[x][y];
+                            return data.matrix[i][j];
                         }
                     }
 
