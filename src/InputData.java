@@ -46,4 +46,12 @@ public class InputData {
             System.out.println(e.getMessage());
         }
     }
+
+    public void markSlice(Cell topLeft, Cell bottomRight) {
+        for (int i = topLeft.x; i <= bottomRight.x; i++) {
+            for (int j = topLeft.y; j <= bottomRight.y; j++) {
+                this.matrix[i][j].isTaken = true;
+            }
+        }
+    }
 }

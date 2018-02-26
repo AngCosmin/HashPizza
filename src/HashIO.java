@@ -9,7 +9,7 @@ public class HashIO {
             PrintWriter writer = new PrintWriter(file);
 
             // Print the number of results
-            writer.print(data.size());
+            writer.println(data.size());
 
             for (int i = 0; i < data.size(); i++) {
                 int x0 = data.get(i).topLeft.x;

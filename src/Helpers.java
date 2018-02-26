@@ -5,21 +5,25 @@ public class Helpers {
     public static boolean checkSlice(InputData data, Cell topLeft, Cell bottomRight) {
         int numberOfTomatos = 0;
         int numberOfMushrooms = 0;
+        int x;
+        int y;
 
-        int x = bottomRight.x - topLeft.x + 1;
-        int y = bottomRight.y - topLeft.y + 1;
+        x = bottomRight.x - topLeft.x + 1;
+        y = bottomRight.y - topLeft.y + 1;
 
         if (x * y > data.maxNumberOfCells) {
+            System.out.println(topLeft.x + " " + topLeft.y + " "  + bottomRight.x + " " + bottomRight . y);
+            System.out.println("max " + x + " " + y + " " + data.maxNumberOfCells);
             return false;
         }
 
-        for (int i = topLeft.x; i < bottomRight.x; i++) {
-            for (int j = topLeft.y; j < bottomRight.y; j++) {
+        for (int i = topLeft.x; i <= bottomRight.x; i++) {
+            for (int j = topLeft.y; j <= bottomRight.y; j++) {
                 if (data.matrix[i][j].isTaken) {
                     return false;
                 }
 
-                if (data.matrix[i][j] instanceof Mushroom) {
+                if (data.matrix[i][j].type == false) {
                     numberOfMushrooms++;
                 }
                 else {
@@ -28,6 +32,7 @@ public class Helpers {
             }
         }
 
+        System.out.println("ingred " + numberOfMushrooms + " " + numberOfTomatos);
         if (numberOfMushrooms >= data.minNumberOfEachIncredient && numberOfTomatos >= data.minNumberOfEachIncredient) {
             return true;
         }
@@ -41,7 +46,7 @@ public class Helpers {
         for (int i = topLeft.x; i < bottomRight.x; i++) {
             for (int j = topLeft.y; j < bottomRight.y; j++) {
                 if (data.matrix[i][j] instanceof Mushroom) {
-                     number++;
+                    number++;
                 }
             }
         }
@@ -78,14 +83,6 @@ public class Helpers {
         return directions;
     }
 
-    public static void markSlice(InputData data, Cell topLeft, Cell bottomRight) {
-        for (int i = topLeft.x; i < bottomRight.x; i++) {
-            for (int j = topLeft.y; j < bottomRight.y; j++) {
-                data.matrix[i][j].isTaken = true;
-            }
-        }
-    }
-
     public static Cell getFirstNotTakenCell (InputData data) {
         for (short i = 0; i < data.rows; i++) {
             for (short j = 0; j < data.columns; j++) {
@@ -95,6 +92,10 @@ public class Helpers {
                     for (int k = 0; k < 5; k++) {
                         int x = directions.elementAt(k).x;
                         int y = directions.elementAt(k).y;
+
+                        if (x < 0 || y < 0 || x > data.rows - 1 || y > data.columns - 1) {
+                            continue;
+                        }
 
                         if (!data.matrix[x][y].isTaken) {
                             return data.matrix[x][y];
@@ -106,5 +107,11 @@ public class Helpers {
         }
 
         return null;
+    }
+    public static int sliceDimensions (Cell topLeft, Cell bottomRight) {
+        int x = bottomRight.x - topLeft.x + 1;
+        int y = bottomRight.y - topLeft.y + 1;
+    
+        return x * y;
     }
 }
