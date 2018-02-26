@@ -2,9 +2,11 @@ import java.awt.*;
 import java.util.*;
 
 public class Main {
+    //Run like this:
+    // make run ARGS="fis.in fis.out"
     public static void main(String[] args) {
         InputData in = new InputData();
-        in.read("big.in");
+        in.read(args[0]);
         ArrayList<OutputData> out = new ArrayList<>();
 
         Queue<Cell> neighbors = new LinkedList<>();
@@ -106,6 +108,6 @@ public class Main {
             //System.out.println("taken " + in.matrix[0][0].isTaken);
         }
         
-        HashIO.write(out, "big.txt");
+        HashIO.write(out, args[1]);
     }
 }
