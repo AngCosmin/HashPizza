@@ -1,5 +1,7 @@
 import java.io.*;
 import java.util.Scanner;
+import java.awt.*;
+import java.util.Vector;
 
 public class InputData {
     // Input elements
@@ -53,5 +55,31 @@ public class InputData {
                 this.matrix[i][j].isTaken = true;
             }
         }
+    }
+
+    public Cell getFirstNotTakenCell () {
+        for (short i = 0; i < this.rows; i++) {
+            for (short j = 0; j < this.columns; j++) {
+                if (!this.matrix[i][j].isTaken) {
+                    Vector<Point> directions = Helpers.getDirectionsVector();
+
+                    for (int k = 0; k < 5; k++) {
+                        int x = i + directions.elementAt(k).x;
+                        int y = j + directions.elementAt(k).y;
+
+                        if (x < 0 || y < 0 || x > this.rows - 1 || y > this.columns - 1) {
+                            continue;
+                        }
+
+                        if (!this.matrix[x][y].isTaken) {
+                            return this.matrix[i][j];
+                        }
+                    }
+                    this.matrix[i][j].isTaken = true;
+                }
+            }
+        }
+
+        return null;
     }
 }

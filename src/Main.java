@@ -23,7 +23,6 @@ public class Main {
             while (!neighbors.isEmpty()) {
                 bottomRight = neighbors.remove();
 
-
                 isValid = Helpers.checkSlice(in, topLeft, bottomRight);
                 System.out.println("Queue " + topLeft.x + " " + topLeft.y + " " + bottomRight.x + " " + bottomRight.y + " " + isValid);
 
@@ -100,12 +99,13 @@ public class Main {
                 }
 
                 out.add(new OutputData(topLeft, bottomRight));
-                in.markSlice(topLeft, bottomRight);
+                
             }
-
-            topLeft = Helpers.getFirstNotTakenCell(in);
+            
+            in.markSlice(topLeft, bottomRight);
+            topLeft = in.getFirstNotTakenCell();
+            System.out.println("taken " + in.matrix[0][0].isTaken);
             neighbors.clear();
-            //System.out.println("taken " + in.matrix[0][0].isTaken);
         }
         
         HashIO.write(out, args[1]);

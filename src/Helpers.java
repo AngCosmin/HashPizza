@@ -83,31 +83,6 @@ public class Helpers {
         return directions;
     }
 
-    public static Cell getFirstNotTakenCell (InputData data) {
-        for (short i = 0; i < data.rows; i++) {
-            for (short j = 0; j < data.columns; j++) {
-                if (!data.matrix[i][j].isTaken) {
-                    Vector<Point> directions = Helpers.getDirectionsVector();
-
-                    for (int k = 0; k < 5; k++) {
-                        int x = directions.elementAt(k).x;
-                        int y = directions.elementAt(k).y;
-
-                        if (x < 0 || y < 0 || x > data.rows - 1 || y > data.columns - 1) {
-                            continue;
-                        }
-
-                        if (!data.matrix[x][y].isTaken) {
-                            return data.matrix[i][j];
-                        }
-                    }
-
-                }
-            }
-        }
-
-        return null;
-    }
     public static int sliceDimensions (Cell topLeft, Cell bottomRight) {
         int x = bottomRight.x - topLeft.x + 1;
         int y = bottomRight.y - topLeft.y + 1;
